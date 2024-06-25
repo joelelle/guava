@@ -80,8 +80,6 @@ resource "aws_instance" "guavainstance" {
       "sudo amazon-linux-extras install epel -y",  
       "sudo yum install -y ansible", 
       "sudo chmod 600 /Users/queenoftheuniverse/.ssh/guava_api_key",
-      "scp -i /Users/queenoftheuniverse/.ssh/guava_api_key /path/to/your/playbook.yml ec2-user@${self.public_ip}:/home/ec2-user/",
-      "ssh -i /Users/queenoftheuniverse/.ssh/guava_api_key ec2-user@${self.public_ip} 'ansible-playbook /home/ec2-user/playbook.yml'"
     ]
   }
 }
