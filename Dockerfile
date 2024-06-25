@@ -1,10 +1,11 @@
-FROM ruby:2.6
-FROM node:15
+FROM node:18-alpine
+#RUN addgroup --system guavagroup && adduser --system --group guavauser
 WORKDIR /src/rg-ops
-COPY package*.json app.js ./
-RUN npm install
+COPY package*.json ./
+RUN npm ci --only=production
+COPY app.js ./
+USER appuser
 EXPOSE 3000
+#HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD curl -f http://localhost:3000/health || exit 1
 CMD ["node", "app.js"]
 
-ENV BASIC_AUTH_USER=admin
-ENV BASIC_AUTH_PASSWORD=super-secret-password
